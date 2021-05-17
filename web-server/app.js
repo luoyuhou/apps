@@ -1,21 +1,21 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(app.router);
-  app.set('view engine', 'jade');
-  app.set('views', __dirname + '/public');
-  app.set('view options', {layout: false});
-  app.set('basepath',__dirname + '/public');
+app.use(express.methodOverride());
+app.use(express.bodyParser());
+app.use(app.router);
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/public');
+app.set('view options', {layout: false});
+app.set('basepath',__dirname + '/public');
 
 let env = app.get('env');
-if(env=="development"){
+if(env==="development"){
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 }
-if(env == "production"){
-  var oneYear = 31557600000;
+if(env === "production"){
+  const oneYear = 31557600000;
   app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
   app.use(express.errorHandler());
 }

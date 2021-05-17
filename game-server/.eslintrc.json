@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "extends": [
+
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "semi": "error",
+    "arrow-parens": "error",
+    "arrow-spacing": "error",
+    "no-var": 0,
+    "brace-style": [1, "1tbs"],
+    "no-multiple-empty-lines": [1, {"max": 2}],
+    "no-mixed-spaces-and-tabs": [2, false]
+  }
+}

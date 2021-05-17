@@ -17,9 +17,10 @@
     <script src="js/lib/pinusclient.js">
     </script>
     <script type="text/javascript">
-      var pinus = window.pinus;
-      var host = "127.0.0.1";
-      var port = "3010";
+      const pinus = window.pinus;
+      const host = "127.0.0.1";
+      const port = "3010";
+
       function show() {
         pinus.init({
           host: host,
@@ -27,7 +28,16 @@
           log: true
         }, function() {
         pinus.request("connector.entryHandler.entry", "hello pinus", function(data) {
-            alert(data.msg);
+            console.log(data.msg);
+          });
+
+          pinus.request("connector.entryHandler.register", {
+            username: 'jack',
+            password: '123456',
+            email: 'luoyuhou@qq.com',
+            avatar: 'https://dss1.bdstatic.com'
+          }, function(data) {
+            console.log(data.msg);
           });
         });
       }

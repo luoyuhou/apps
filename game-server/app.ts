@@ -1,5 +1,6 @@
 import { pinus } from 'pinus';
 import { preload } from './preload';
+import { getConnectionOptions, createConnection } from 'typeorm';
 
 /**
  *  替换全局Promise
@@ -11,7 +12,7 @@ preload();
 /**
  * Init app for client.
  */
-var app = pinus.createApp();
+const app = pinus.createApp();
 app.set('name', 'apps');
 
 // app configuration
@@ -28,8 +29,17 @@ app.configure('production|development', 'connector', function(){
     });
 });
 
-// start app
-app.start();
+const connectDB = async () => {
+  const connectionOptions = await getConnectionOptions();
+  return await createConnection(connectionOptions);
+};
+
+connectDB().then((con) => {
+  // start app
+  app.start();
+}).catch((error) => {
+  console.error('Connect db error: ', error.message);
+});
 
 process.on('uncaughtException', function (err) {
   console.error(' Caught exception: ' + err.stack);

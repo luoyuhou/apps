@@ -8,19 +8,30 @@
     "main": "./dist/app",
     "scripts": {
         "start": "npm run build && cd dist &&  node app",
+        "db": "rimraf ./app/entity & npx typeorm-model-generator -h 127.0.0.1 -d apps -p 3306 -u root -x root -e mysql -o ./app/entity --noConfig true --ce pascal --cp camel",
         "build": "node_modules/.bin/tsc  && node copy"
     },
     "dependencies": {
-        "@types/node": "8.10.54",
         "@types/bluebird": "^3.5.19",
-        "pinus": "1.4.12",
+        "@types/node": "8.10.54",
+        "bcryptjs": "^2.4.3",
         "bluebird": "^3.5.1",
+        "mysql": "^2.18.1",
+        "pinus": "1.4.12",
+        "reflect-metadata": "^0.1.10",
         "source-map-support": "^0.5.0",
-        "reflect-metadata": "^0.1.10"
+        "typeorm": "^0.2.32",
+        "uuid": "^8.3.2"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.23.0",
+        "@typescript-eslint/parser": "^4.23.0",
         "cpy": "^8.1.0",
-        "tslint": "5.20.1",
+        "eslint": "^7.26.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-config-standard": "^16.0.2",
+        "eslint-plugin-prettier": "^3.4.0",
         "typescript": "3.7.3"
     }
 }
