@@ -19,27 +19,50 @@
     <script type="text/javascript">
       const pinus = window.pinus;
       const host = "127.0.0.1";
-      const port = "3010";
+      const port = 3014;
+
+      // query connector
+      function queryEntry(route, uid, callback) {
+        pinus.init({
+          host,
+          port,
+          log: true
+        }, function () {
+          pinus.request(route, {
+            uid: uid
+          }, function(data) {
+            console.log('data', data);
+            pinus.disconnect();
+            if(data.code === 500) {
+              console.log('disconnect')
+              return;
+            }
+            callback(data.host, data.port);
+          });
+        })
+      }
 
       function show() {
-        pinus.init({
-          host: host,
-          port: port,
-          log: true
-        }, function() {
-        pinus.request("connector.entryHandler.entry", "hello pinus", function(data) {
-            console.log(data.msg);
-          });
+        queryEntry('gate.gateHandler.entry', Math.random().toString(), (host, port) => {
+          pinus.init({
+            host: host,
+            port: port,
+            log: true
+          }, function() {
+            // pinus.request("connector.entryHandler.entry", "hello pinus", function(data) {
+            //     console.log(data.msg);
+            //   });
 
-          pinus.request("connector.entryHandler.register", {
-            username: 'jack',
-            password: '123456',
-            email: 'luoyuhou@qq.com',
-            avatar: 'https://dss1.bdstatic.com'
-          }, function(data) {
-            console.log(data.msg);
+            pinus.request("connector.entryHandler.entry", {
+              username: 'jack',
+              password: '123456',
+              email: 'luoyuhou@qq.com',
+              avatar: 'https://dss1.bdstatic.com'
+            }, function(data) {
+              console.log(data.msg);
+            });
           });
-        });
+        })
       }
     </script>
  

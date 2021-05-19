@@ -5,7 +5,7 @@ export class UsersLogs {
   @PrimaryGeneratedColumn({ type: "int", name: "users_logs_id" })
   usersLogsId: number;
 
-  @Column("varchar", { name: "users_logs_users_u_id", length: 16 })
+  @Column("varchar", { name: "users_logs_users_u_id", length: 64 })
   usersLogsUsersUId: string;
 
   @Column("varchar", { name: "users_logs_ip", length: 32 })
